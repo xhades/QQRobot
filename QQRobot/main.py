@@ -15,7 +15,7 @@ def log():
                         level=logging.DEBUG,
                         format='[%(levelname)s] [%(asctime)s]: %(message)s',
                         datefmt='%d/%b/%Y %H:%M:%S')
-    handler = logging.StreamHandler()
+    handler = logging.FileHandler('QQRobot.log')
     handler.setLevel(logging.INFO)
     formatter = logging.Formatter('[%(levelname)-6s[%(asctime)s]]: %(message)s')
     handler.setFormatter(formatter)
