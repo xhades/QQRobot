@@ -35,7 +35,7 @@ def hand_msg(msg):
 
 
 def main():
-    send_msg = '您好,这里是机器人,稍后回复您的消息,抱歉.(望勿频繁调戏机器人...)'
+    SEND_MSG = '您好,这里是机器人,稍后回复您的消息,抱歉.(望勿频繁调戏机器人...)'
     bot = Login()
     LOG.info('请扫描二维码.')
     print(bot.get_QRcode())
@@ -60,7 +60,7 @@ def main():
             msg = bot.poll()
             msg_content, from_uin, msg_type = hand_msg(msg[0])
             LOG.info('{0} 发来一条消息: {1}'.format(from_uin, msg_content.encode('utf-8')))
-            send_status = bot.send_msg(send_msg, from_uin, msg_type)
+            send_status = bot.send_msg(SEND_MSG, from_uin, msg_type)
             LOG.info('回复 {0}: {1}'.format(from_uin, send_status))
         except KeyboardInterrupt:
             LOG.info('See You...')
