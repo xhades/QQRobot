@@ -131,4 +131,3 @@ class Login:
             return send_res
         else:
             return 'No Action.'
-

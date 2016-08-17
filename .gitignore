@@ -1,3 +1,5 @@
 *.png
 /QQrobot/cookies
 *.log
+*.pyc
+cookies

@@ -2,6 +2,7 @@
 # coding:utf-8
 
 import logging
+import os
 import sys
 import time
 import json
@@ -38,6 +39,7 @@ def main():
     bot = Login()
     LOG.info('请扫描二维码.')
     print(bot.get_QRcode())
+    os.remove('QRcode.png')
     Is_login = False
     while not Is_login:
         time.sleep(2)
