@@ -1,2 +1,4 @@
-# QQRobot
-一个 小小的 QQ 机器人
+```python
+$ cd QQRobot
+$ python main.py
+```
