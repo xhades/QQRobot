@@ -7,6 +7,16 @@ import requests
 from ShowQRcode import ShowQRcode
 
 
+def bknHash(skey, init_str=5381):
+    """算法来自https://github.com/pandolia/qqbot
+    """
+    hash_str = init_str
+    for i in skey:
+        hash_str += (hash_str << 5) + ord(i)
+    hash_str = int(hash_str & 2147483647)
+    return hash_str
+
+
 class Login:
     """
     Login SmartQQ
@@ -52,13 +62,14 @@ class Login:
                  ignore_discard=True)
 
     def is_login(self):
-        url = ("https://ssl.ptlogin2.qq.com/ptqrlogin?webqq_type=10&"
+        url = ("https://ssl.ptlogin2.qq.com/ptqrlogin?"
+               "ptqrtoken={0}&webqq_type=10&"
                "remember_uin=1&login2qq=1&aid=501004106&u1=http%3A%2F"
                "%2Fw.qq.com%2Fproxy.html%3Flogin2qq%3D1%26webqq_type%"
                "3D10&ptredirect=0&ptlang=2052&daid=164&from_ui=1&pttype=1&"
-               "dumy=&fp=loginerroralert&action=0-0-157510&mibao_css=m_webqq&"
-               "t=1&g=1&js_type=0&js_ver=10169&login_sig=&"
-               "pt_randsalt=0")
+               "dumy=&fp=loginerroralert&action=0-0-8449&mibao_css=m_webqq&"
+               "t=1&g=1&js_type=0&js_ver=10216&login_sig=&"
+               "pt_randsalt=2".format(bknHash(self.session.cookies.get('qrsig'), init_str=0)))
         self.session.headers['Referer'] = (
             "https://ui.ptlogin2.qq.com/cgi-bin/login?daid=164&target=self&"
             "style=16&mibao_css=m_webqq&appid=501004106&enable_qlogin=0&"
@@ -66,6 +77,7 @@ class Login:
             "f_url=loginerroralert&strong_login=1&login_state=10&t=20131024001"
         )
         response = self.http_requests("GET", url, self.session.headers)[0]
+        print(self.session.cookies.get('qrsig'))
         self.Ptwebqq_url = response.split("','")[2]
 #        self.save_cookies()
         return response

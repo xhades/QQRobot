@@ -17,6 +17,6 @@ class ShowQRcode:
         for w in range(self.width):
             for h in range(self.height):
                 res = im.getpixel((h, w))
-                text += '  ' if res == 0 else '██'
+                text += '██' if res == 0 else '  '
             text += '\n'
         return text

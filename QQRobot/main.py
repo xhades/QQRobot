@@ -36,14 +36,13 @@ def hand_msg(msg):
     return [msg_content, from_uin, msg_type]
 
 
-SEND_MSG = ("[自动回复]这里是机器人,稍后回复您的消息,"
-            "抱歉.(望勿频繁调戏机器人...)")
+SEND_MSG = ("[自动回复]这里是机器人~")
 
 def main():
     bot = Login()
     LOG.info('请扫描二维码.')
     print(bot.get_QRcode())
-    os.remove('QRcode.png')
+    os.remove("QRcode.png")
     IS_LOGIN = False
     while not IS_LOGIN:
         time.sleep(2)
